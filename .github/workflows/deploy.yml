@@ -55,5 +55,5 @@ jobs:
           port: 22
           script: |
             cd /var/www/rounding.teschmacher.dev/html
-            sudo tar -xzvf ../public.tar.gz --strip 1
+            tar -xzvf ../public.tar.gz --strip 1
             rm ../public.tar.gz
