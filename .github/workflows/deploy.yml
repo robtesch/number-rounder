@@ -43,7 +43,7 @@ jobs:
           username: deployer
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          source: "dist.tar.gz"
+          source: "./.output/public/*"
           target: "/var/www/rounding.teschmacher.dev/html"
 
       - name: Extract artifacts on server
