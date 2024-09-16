@@ -33,12 +33,27 @@ jobs:
           pnpm build
           pnpm generate
 
-      - name: Deploy to Droplet
+      - name: Create a tarball of public directory
+        run: tar -czvf public.tar.gz -C ./.output/public .
+
+      - name: Deploy tarball to Droplet
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.DROPLET_IP }}
           username: deployer
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: 22
-          source: ".output/public/*"
-          target: "/var/www/rounding.teschmacher.dev/html"
+          source: "public.tar.gz"
+          target: "/var/www/rounding.teschmacher.dev"
+
+      - name: Extract tarball on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DROPLET_IP }}
+          username: deployer
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: 22
+          script: |
+            cd /var/www/rounding.teschmacher.dev/html
+            sudo tar -xzvf ../public.tar.gz --strip 1
+            rm ../public.tar.gz
