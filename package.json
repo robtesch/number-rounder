@@ -1,0 +1,42 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "type-check": "vue-tsc --noEmit",
+    "format": "prettier --write .",
+    "lint": "eslint src --fix"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
+    "@primevue/themes": "^4.0.7",
+    "@vesp/nuxt-fontawesome": "^1.1.0",
+    "nuxt": "^3.13.1",
+    "pinia": "^2.2.2",
+    "pinia-plugin-persistedstate": "^4.0.1",
+    "primevue": "^4.0.7",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@primevue/nuxt-module": "^4.0.7",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-vue": "^9.28.0",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.5.0",
+    "vue-tsc": "^2.1.6"
+  }
+}
