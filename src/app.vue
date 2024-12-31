@@ -1,57 +1,70 @@
 <template>
-  <div class="max-w-xl mx-auto mt-12 text-center relative">
-    <h1 class="text-3xl font-bold mb-8">Number Rounding Rockstars</h1>
+  <div
+    class="text-center relative h-screen flex flex-col items-center w-screen overflow-hidden p-4"
+  >
+    <main class="grow max-w-2xl">
+      <div class="flex gap-2 items-center mb-8">
+        <h1 class="text-3xl font-bold">Number Rounding Rockstars</h1>
 
-    <!-- Settings Icon -->
-    <div class="absolute right-2 top-2">
-      <PButton
-        @click="showSettings = true"
-        aria-label="Settings"
-        class="p-button-text"
-      >
-        <FontAwesome :icon="['fas', 'cog']" />
-      </PButton>
-    </div>
+        <!-- Settings Icon -->
+        <div>
+          <PButton
+            @click="showSettings = true"
+            aria-label="Settings"
+            class="p-button-text"
+          >
+            <FontAwesome :icon="['fas', 'cog']" />
+          </PButton>
+        </div>
+      </div>
 
-    <!-- Settings Modal -->
-    <SettingsModal
-      v-model:visible="showSettings"
-      :availableRoundingOptions="availableRoundingOptions"
-      @save-settings="saveSettings"
-    />
+      <!-- Settings Modal -->
+      <SettingsModal
+        v-model:visible="showSettings"
+        :availableRoundingOptions="availableRoundingOptions"
+        @save-settings="saveSettings"
+      />
 
-    <!-- Start Screen -->
-    <div v-if="!quizStarted" class="mt-8">
-      <PButton label="Start" @click="startQuiz" class="p-button-success mb-6" />
+      <!-- Start Screen -->
+      <div v-if="!quizStarted" class="mt-8">
+        <PButton
+          label="Start"
+          @click="startQuiz"
+          class="p-button-success mb-6"
+        />
 
-      <!-- Game History -->
-      <GameHistory v-if="gameHistoryStore.history.length > 0" />
-    </div>
+        <!-- Game History -->
+        <GameHistory v-if="gameHistoryStore.history.length > 0" />
+      </div>
 
-    <!-- Quiz Screen -->
-    <QuizScreen
-      v-if="quizStarted && timeLeft > 0"
-      :formattedTime="formattedTime"
-      :correctCount="correctCount"
-      :questionCount="questionCount"
-      :currentQuestion="currentQuestion"
-      v-model:userAnswer="userAnswer"
-      :isAnswerCorrect="isAnswerCorrect"
-      :correctAnswer="correctAnswer"
-      :showFeedback="showFeedback"
-      @submit-answer="submitAnswer"
-      @handle-input="handleNumPadInput"
-      @delete-last-digit="deleteLastDigit"
-      @quit="endQuiz(false)"
-    />
+      <!-- Quiz Screen -->
+      <QuizScreen
+        v-if="quizStarted && timeLeft > 0"
+        :formattedTime="formattedTime"
+        :correctCount="correctCount"
+        :questionCount="questionCount"
+        :currentQuestion="currentQuestion"
+        v-model:userAnswer="userAnswer"
+        :isAnswerCorrect="isAnswerCorrect"
+        :correctAnswer="correctAnswer"
+        :showFeedback="showFeedback"
+        @submit-answer="submitAnswer"
+        @handle-input="handleNumPadInput"
+        @delete-last-digit="deleteLastDigit"
+        @quit="endQuiz(false)"
+      />
 
-    <!-- Result Screen -->
-    <ResultScreen
-      v-if="quizStarted && timeLeft <= 0"
-      :correctCount="correctCount"
-      :questionCount="questionCount"
-      @restart-quiz="restartQuiz"
-    />
+      <!-- Result Screen -->
+      <ResultScreen
+        v-if="quizStarted && timeLeft <= 0"
+        :correctCount="correctCount"
+        :questionCount="questionCount"
+        @restart-quiz="restartQuiz"
+      />
+    </main>
+    <footer class="flex flex-col justify-end items-center">
+      <span>Version: {{ $config.public.clientVersion }}</span>
+    </footer>
   </div>
 </template>
 

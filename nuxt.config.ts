@@ -1,4 +1,5 @@
 import Aura from "@primevue/themes/aura";
+import pkg from "./package.json";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
@@ -28,5 +29,10 @@ export default defineNuxtConfig({
   },
   typescript: {
     typeCheck: true,
+  },
+  runtimeConfig: {
+    public: {
+      clientVersion: pkg.version,
+    },
   },
 });
