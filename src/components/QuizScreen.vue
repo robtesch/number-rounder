@@ -129,7 +129,7 @@ export default defineComponent({
       emit("submit-answer");
     };
 
-    const emitUpdateAnswer = (answer: string) => {
+    const emitUpdateAnswer = (answer: string | number) => {
       emit("update:userAnswer", answer);
     };
 
